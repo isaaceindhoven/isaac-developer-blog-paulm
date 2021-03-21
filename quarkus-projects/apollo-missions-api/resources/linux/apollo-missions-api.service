@@ -1,0 +1,13 @@
+[Unit]
+Description=Apollo Missions Java REST API
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/dev
+ExecStart=/home/ubuntu/dev/apollo-missions-api.sh
+Type=simple
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
