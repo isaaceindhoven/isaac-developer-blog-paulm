@@ -14,6 +14,7 @@
 
     <groupId>nl.isaac.devblog</groupId>
     <artifactId>aws-java-logging</artifactId>
+    <version>1.0.0</version>
 
     <build>
         <finalName>${project.name}</finalName>
