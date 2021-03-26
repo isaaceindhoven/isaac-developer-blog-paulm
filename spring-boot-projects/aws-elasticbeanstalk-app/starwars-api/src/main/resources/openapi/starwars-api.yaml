@@ -1,0 +1,125 @@
+openapi: 3.0.3
+info:
+    title: Start Wars API
+    version: 1.0.0
+
+servers:
+    - description: local dev server
+      url: http://localhost:5000/starwars
+
+paths:
+    '/films':
+        get:
+            tags:
+                - Films
+            summary: >-
+                Retrieve a list of produced Star Wars films.
+            operationId: registerPatient
+            security: []
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Film'
+                '500':
+                    $ref: '#/components/responses/500ErrorResponse'
+
+components:
+    schemas:
+        ErrorResponse:
+            type: object
+            description: >-
+                An error that has occurred.
+            properties:
+                id:
+                    type: string
+                    description: >-
+                        A unique reference (e.g., UUID) for the error instance, for audit purposes, in case of unknown/unclassified errors.
+                    minLength: 1
+                    maxLength: 40
+                    example: "072b5fd5-98b7-42f0-88d8-f864e5987413"
+                errorResponseId:
+                    type: string
+                    description: >-
+                        A unique ID (e.g., UUID) which can be used for finding exceptions back in the log file on the server.
+                    minLength: 1
+                    maxLength: 40
+                    example: "072b5fd5-98b7-42f0-88d8-f864e5987413"
+                code:
+                    type: string
+                    description: >-
+                        High level textual error code, to help categorize the errors.
+                    example: "APPO.Client.Semantic"
+                message:
+                    type: string
+                    description: >-
+                        Brief Error message, e.g., 'There is something wrong with the request parameters provided'
+                    minLength: 1
+                    maxLength: 500
+                    example: "A semantic error has occurred."
+                errors:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Error'
+                    minItems: 1
+            required:
+                - code
+                - message
+
+        Error:
+            type: object
+            description: >-
+                Provides details of a specific error
+            properties:
+                errorCode:
+                    type: string
+                    description: >-
+                        Low level textual error code
+                    minLength: 1
+                    maxLength: 128
+                    example: "APPO.Field.Invalid"
+                message:
+                    type: string
+                    description: >-
+                        A description of the error that occurred.
+                    minLength: 1
+                    maxLength: 500
+                    example: "An invalid email address has been provided."
+                path:
+                    type: string
+                    description: >-
+                        Recommended but optional reference to the JSON Path of the field with error.
+                    minLength: 1
+                    maxLength: 500
+                    example: "PatientMedicalApplication.patientProfile.personalInfo.emailAddress"
+            required:
+                - errorCode
+                - message
+
+        Film:
+            type: object
+            description: >-
+                Provides basis film data
+            properties:
+                title:
+                    type: string
+                    minLength: 1
+                    maxLength: 50
+                usReleaseDateText:
+                    type: string
+                    minLength: 1
+                    maxLength: 30
+                wikipediaUrl:
+                    type: string
+
+    responses:
+        500ErrorResponse:
+            description: "Internal Server Error"
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/ErrorResponse'

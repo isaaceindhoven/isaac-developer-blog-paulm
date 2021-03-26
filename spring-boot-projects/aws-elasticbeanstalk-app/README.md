@@ -1,4 +1,4 @@
-# AWS Java Logging
+# AWS Elastic Beanstalk App
 
 Sample java project used in the ISAAC Developer Blog posts.
 
@@ -6,7 +6,7 @@ Sample java project used in the ISAAC Developer Blog posts.
 
 To compile and run this application you will need:
 
-- JDK 11+
+- JDK 1.8+
 
 ## Building the application
 

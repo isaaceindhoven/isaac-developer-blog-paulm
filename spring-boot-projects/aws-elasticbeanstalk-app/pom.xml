@@ -12,24 +12,41 @@
     </parent>
 
     <groupId>nl.isaac.devblog</groupId>
-    <artifactId>aws-java-logging</artifactId>
+    <artifactId>aws-elasticbeanstalk-app</artifactId>
     <version>1.0.0</version>
+    <packaging>pom</packaging>
 
-    <build>
-        <finalName>${project.name}</finalName>
-		
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>		
-    </build>
+    <modules>
+        <module>starwars-api</module>
+        <module>startrek-api</module>
+    </modules>
+
+    <properties>
+        <openapi-generator-maven-plugin.version>4.3.1</openapi-generator-maven-plugin.version>
+        <swagger-annotations.version>1.6.2</swagger-annotations.version>
+        <openapi-nullable.version>0.2.1</openapi-nullable.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- OpenAPI -->
+            <dependency>
+                <groupId>org.openapitools</groupId>
+                <artifactId>jackson-databind-nullable</artifactId>
+                <version>${openapi-nullable.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger-annotations.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
@@ -44,6 +61,27 @@
             </exclusions>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>${project.name}</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.openapitools</groupId>
+                    <artifactId>openapi-generator-maven-plugin</artifactId>
+                    <version>${openapi-generator-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 	
 	<profiles>
         <profile>
