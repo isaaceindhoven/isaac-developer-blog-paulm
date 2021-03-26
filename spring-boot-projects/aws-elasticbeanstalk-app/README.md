@@ -1,6 +1,9 @@
 # AWS Elastic Beanstalk App
 
-Sample java project used in the ISAAC Developer Blog posts.
+Sample java project used in the ISAAC Developer Blog posts. The application consists of two 
+runnable jars:
+- Star Trek API (startrek-api.jar)
+- Star Wars API (starwars-api.jar)
 
 ## Requirements
 
@@ -25,4 +28,8 @@ First compile it:
 
 Then run it:
 
-> java -jar ./aws-java-logging.jar --spring.profiles.active=prod
+Star Trek API:
+> java -jar ./startrek-api/target/startrek-api.jar
+
+Star Wars API:
+> java -jar ./starwars-api/target/starwars-api.jar
